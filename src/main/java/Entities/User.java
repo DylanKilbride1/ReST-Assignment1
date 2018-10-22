@@ -1,40 +1,41 @@
 package Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static javax.persistence.GenerationType.AUTO;
-
-@Entity
+//@Entity
+@XmlRootElement
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = AUTO)
-	private int userId;
+	//@Id
+	//@GeneratedValue(strategy = AUTO)
+	private long userId;
 	private String userName;
-	private int mobileNumber;
-	private String addressLine1, addressLine2, addressLine3;
+	private long mobileNumber;
+	private String addressLine1;
 	private int age;
+	private Map<Long, Order> orders = new HashMap<Long, Order>();
 
-	public User(String userName, int mobileNumber, String addressLine1, String addressLine2, String addressLine3, int age) {
+	public User(long userId, String userName, long mobileNumber, String addressLine1, int age) { /*Do I need to initalize list here?*/
+		this.userId = userId;
 		this.userName = userName;
 		this.mobileNumber = mobileNumber;
 		this.addressLine1 = addressLine1;
-		this.addressLine2 = addressLine2;
-		this.addressLine3 = addressLine3;
 		this.age = age;
 	}
 
 	public User() {
-
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -46,11 +47,11 @@ public class User {
 		this.userName = userName;
 	}
 
-	public int getMobileNumber() {
+	public long getMobileNumber() {
 		return mobileNumber;
 	}
 
-	public void setMobileNumber(int mobileNumber) {
+	public void setMobileNumber(long mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 
@@ -62,27 +63,31 @@ public class User {
 		this.addressLine1 = addressLine1;
 	}
 
-	public String getAddressLine2() {
-		return addressLine2;
-	}
-
-	public void setAddressLine2(String addressLine2) {
-		this.addressLine2 = addressLine2;
-	}
-
-	public String getAddressLine3() {
-		return addressLine3;
-	}
-
-	public void setAddressLine3(String addressLine3) {
-		this.addressLine3 = addressLine3;
-	}
-
 	public int getAge() {
 		return age;
 	}
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	@XmlTransient
+	public Map<Long, Order>getOrders(){
+		return orders;
+	}
+
+	public void setOrders(Map<Long, Order> orders){
+		this.orders = orders;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+						"userId=" + userId +
+						", userName='" + userName + '\'' +
+						", mobileNumber=" + mobileNumber +
+						", addressLine1='" + addressLine1 + '\'' +
+						", age=" + age +
+						'}';
 	}
 }

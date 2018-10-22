@@ -9,7 +9,7 @@
 
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>ReSTassignment1</param-value>
+            <param-value>restAssignment</param-value> <!--Needs to be package containing classes that handles the mappings -> Fixed HTTP 500  -->
         </init-param>
 
         <init-param>
